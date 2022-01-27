@@ -1,0 +1,24 @@
+# permissions for end users to edit kubehosts.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubehosts-editor-role
+rules:
+- apiGroups:
+  - batch.gitee.com
+  resources:
+  - kubehosts
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - batch.gitee.com
+  resources:
+  - kubehosts/status
+  verbs:
+  - get

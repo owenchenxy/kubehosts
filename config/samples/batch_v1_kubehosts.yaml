@@ -1,0 +1,25 @@
+---
+apiVersion: batch.gitee.com/v1
+kind: Kubehosts
+metadata:
+  name: kubehosts-sample
+spec:
+  # TODO(user): Add fields here
+  hostsConfigMap: hosts-config
+  lables:
+    app: test1
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hosts-config
+data:
+  hosts: |
+    # 127.0.0.1 localhost 
+    # this is a test
+    # yt
+    # ii
+    # yesyes
+
+
+

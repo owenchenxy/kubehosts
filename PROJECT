@@ -1,0 +1,16 @@
+domain: gitee.com
+layout:
+- go.kubebuilder.io/v3
+projectName: kubehosts
+repo: github.com/owenchenxy/kubehosts
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: gitee.com
+  group: batch
+  kind: Kubehosts
+  path: github.com/owenchenxy/kubehosts/api/v1
+  version: v1
+version: "3"
