@@ -48,9 +48,9 @@ type KubehostsReconciler struct {
 	Recorder record.EventRecorder
 }
 
-//+kubebuilder:rbac:groups=batch.gitee.com,resources=kubehosts,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=batch.gitee.com,resources=kubehosts/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=batch.gitee.com,resources=kubehosts/finalizers,verbs=update
+//+kubebuilder:rbac:groups=batch.github.com,resources=kubehosts,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=batch.github.com,resources=kubehosts/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=batch.github.com,resources=kubehosts/finalizers,verbs=update
 
 // +kubebuilder:rbac:groups="",resources=events,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups="",resources=pods,verbs=get;list;watch;create;update;patch;delete
@@ -102,7 +102,6 @@ func (r *KubehostsReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 	// 筛选条件为空，即选出所有pod
 	opts := []client.ListOption{
 		//client.InNamespace(req.Namespace), // 筛选条件为：在req的namespace下
-		//client.MatchingLabelsSelector{labels.SelectorFromSet(kubeHosts.Spec.Lables)},
 	}
 	for label, value := range kubeHosts.Spec.Lables {
 		opts = append(opts, client.MatchingLabels{label: value})
@@ -120,9 +119,6 @@ func (r *KubehostsReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 }
 
 func (r *KubehostsReconciler) getDeployedKubehostsResource(ctx context.Context, req ctrl.Request) (*batchv1.Kubehosts, error) {
-	// We sleep 1 second to let sufficient time to Kubernetes to update its system
-	// so that when we will call the Get method below, we will receive the latest Kubehosts resource
-	//time.Sleep(1 * time.Second)
 	kubehosts := &batchv1.Kubehosts{}
 	err := r.Client.Get(ctx, req.NamespacedName, kubehosts)
 	if err == nil {
@@ -151,7 +147,6 @@ func (r *KubehostsReconciler) findObjectsForPod(pod client.Object) []reconcile.R
 			}
 		}
 	}
-	//log.Println(podLabelMatchedKubehosts)
 	requests := make([]reconcile.Request, len(podLabelMatchedKubehosts.Items))
 	for i, item := range podLabelMatchedKubehosts.Items {
 		requests[i] = reconcile.Request{
@@ -170,7 +165,6 @@ func (r *KubehostsReconciler) findObjectsForConfigMap(configMap client.Object) [
 	listOps := &client.ListOptions{
 		// hostsConfigMap字段
 		FieldSelector: fields.OneTermEqualSelector(".spec.hostsConfigMap", configMap.GetName()),
-		//Namespace:     configMap.GetNamespace(),
 	}
 	err := r.Client.List(context.TODO(), attachedConfigKubehosts, listOps)
 	if err != nil {

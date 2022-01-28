@@ -6,9 +6,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.7.0
   creationTimestamp: null
-  name: kubehosts.batch.gitee.com
+  name: kubehosts.batch.github.com
 spec:
-  group: batch.gitee.com
+  group: batch.github.com
   names:
     kind: Kubehosts
     listKind: KubehostsList

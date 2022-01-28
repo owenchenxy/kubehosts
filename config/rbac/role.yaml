@@ -91,7 +91,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - batch.gitee.com
+  - batch.github.com
   resources:
   - kubehosts
   verbs:
@@ -103,13 +103,13 @@ rules:
   - update
   - watch
 - apiGroups:
-  - batch.gitee.com
+  - batch.github.com
   resources:
   - kubehosts/finalizers
   verbs:
   - update
 - apiGroups:
-  - batch.gitee.com
+  - batch.github.com
   resources:
   - kubehosts/status
   verbs:

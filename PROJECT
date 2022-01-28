@@ -1,4 +1,4 @@
-domain: gitee.com
+domain: github.com
 layout:
 - go.kubebuilder.io/v3
 projectName: kubehosts
@@ -8,7 +8,7 @@ resources:
     crdVersion: v1
     namespaced: true
   controller: true
-  domain: gitee.com
+  domain: github.com
   group: batch
   kind: Kubehosts
   path: github.com/owenchenxy/kubehosts/api/v1
