@@ -13,5 +13,5 @@ It checks the labels of the pod, if one or more label matches one of the kubehos
 
 **Getting started**
 
-If you would like to install Kubehosts
+TODO
 
